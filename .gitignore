@@ -14,5 +14,6 @@ Untitled\ Folder\ 1
 .DS_Store
 Pipfile
 Pipfile.lock
+.vscode
 
 __pycache__

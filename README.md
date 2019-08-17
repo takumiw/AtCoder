@@ -2,8 +2,8 @@
 
 ## Profile
 Link: https://atcoder.jp/users/takumiw  
-User Name: takumiw  
-Current Color: Green coder
+User name: takumiw  
+Current color: Green coder
 
 
 ## AtCoder Link

@@ -1,6 +1,5 @@
 import sys
 input = sys.stdin.readline
-
 N = int(input())
 H = list(map(int, input().rstrip().split()))
 

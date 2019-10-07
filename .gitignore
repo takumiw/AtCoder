@@ -180,5 +180,5 @@ dmypy.json
 Pipfile
 Pipfile.lock
 .vscode
-
-__pycache__
+ABC104/
+ABC142/E.py

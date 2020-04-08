@@ -1,4 +1,3 @@
-import time
 n, a, b = map(int, input().split())
 MOD = 10 ** 9 + 7
 
@@ -13,13 +12,11 @@ def comb(n,r, mod):
     return res * pow(fac, mod-2, mod) % mod
 
 def main():
-    s = time.time()
     ans = pow(2, n, MOD) - 1
     ans -= comb(n=n, r=a, mod=MOD)
     ans -= comb(n=n, r=b, mod=MOD)
     ans %= MOD
     print(ans)
-    print(time.time()-s)
 
 if __name__ == "__main__":
     main()

@@ -38,7 +38,7 @@ def binary_search(l: list, x: int) -> bool:
 
 # 重複を含む順列を生成する
 from itertools import permutations
-def permutation(l: list, n: int) -> list:
+def permutation(l, n):
     '''
     lPnの順列を生成する
     @param l: 順列を生成する要素のリスト
@@ -50,7 +50,7 @@ def permutation(l: list, n: int) -> list:
 
 # 重複を含まない組み合わせを生成する
 from itertools import combinations
-def combination(l: list, n: int) -> list:
+def combination(l, n):
     '''
     lCnの組み合わせを生成する
     @param l: 組み合わせを生成する要素のリスト
@@ -61,7 +61,7 @@ def combination(l: list, n: int) -> list:
 
 
 # 2以上の整数の約数を列挙する, O(√n)
-def make_divisors(n: int) -> list:
+def make_divisors(n) -> list:
     divisors = []
     for i in range(1, int(n**0.5)+1):
         if n % i == 0:
@@ -74,7 +74,7 @@ def make_divisors(n: int) -> list:
 
 # 素数かどうか判定する, O(√n)
 import math
-def is_prime(x: int) -> bool:
+def is_prime(x):
     if x < 2: return False  # 2未満に素数はない
     if x == 2 or x == 3 or x == 5: return True  # 2,3,5は素数
     if x % 2 == 0 or x % 3 == 0 or x % 5 == 0: return False  # 2,3,5の倍数は合成数
@@ -85,3 +85,14 @@ def is_prime(x: int) -> bool:
         prime += step
         step = 6 - step
     return True
+
+
+### N進数->10進数
+def base_n_to_10(s, n):
+    return int(s, n)
+
+### 10進数->N進数
+def base_10_to_n(i, n):
+    if i//n:
+        return base_10_to_n(i//n, n) + str(i % n)
+    return str(i % n)

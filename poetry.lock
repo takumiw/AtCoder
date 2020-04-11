@@ -1,0 +1,46 @@
+[[package]]
+category = "main"
+description = "NumPy: array processing for numbers, strings, records, and objects."
+name = "numpy"
+optional = false
+python-versions = "*"
+version = "1.8.2"
+
+[[package]]
+category = "main"
+description = "SciPy: Scientific Library for Python"
+name = "scipy"
+optional = false
+python-versions = "*"
+version = "0.13.3"
+
+[metadata]
+content-hash = "512c45d90314c9a9c764c23b36a6e3897fff4d0ea613ba3761e3f5a54119fe26"
+python-versions = "^3.4"
+
+[metadata.files]
+numpy = [
+    {file = "numpy-1.8.2-cp26-cp26m-manylinux1_x86_64.whl", hash = "sha256:f9ab980aa9d3d90f1d072fc8c53a6df2e5b2eedabb38fad42d844152940d0fdc"},
+    {file = "numpy-1.8.2-cp26-cp26mu-manylinux1_x86_64.whl", hash = "sha256:3fd6e20ea9550ceb2e9ebecba35517e855ea7b4f08441f51b2731d4a26663f0a"},
+    {file = "numpy-1.8.2-cp27-cp27m-manylinux1_x86_64.whl", hash = "sha256:99699e3e7df919fc6bbdfbdbc2ccef86a955c6d782f1b284e656ae735317c1b1"},
+    {file = "numpy-1.8.2-cp27-cp27mu-manylinux1_x86_64.whl", hash = "sha256:ee209ac66442eb5b63bb180a281678ef8204e0b0bb45b83269e13b5158759eca"},
+    {file = "numpy-1.8.2-cp27-none-macosx_10_6_intel.macosx_10_9_intel.macosx_10_9_x86_64.whl", hash = "sha256:860afb63f154777e69908b9daef7d10929f8257526aee9553f6548ed962cd5e7"},
+    {file = "numpy-1.8.2-cp33-cp33m-macosx_10_6_intel.macosx_10_9_intel.macosx_10_9_x86_64.whl", hash = "sha256:664800623cc68176ea02e23302536e2e75a0f5d3b70e22dc7ca61d67d2b4b630"},
+    {file = "numpy-1.8.2-cp33-cp33m-manylinux1_x86_64.whl", hash = "sha256:3db7b3cf424eae4dcfd0cc2d45c51af8ff41c9112685f0e1c9ae86dd05afd411"},
+    {file = "numpy-1.8.2-cp34-cp34m-macosx_10_6_intel.macosx_10_9_intel.macosx_10_9_x86_64.whl", hash = "sha256:cf678f27b2f18f00a045f81d1d80a27bf058d190e5baa9acc1af917481c53321"},
+    {file = "numpy-1.8.2-cp34-cp34m-manylinux1_x86_64.whl", hash = "sha256:952ed819b411bbf830aef61ce30ab8937ad5ac63a0c7166d1743af463dd38d71"},
+    {file = "numpy-1.8.2.tar.gz", hash = "sha256:6d487fc724780d66746bde264ea71f5cd77d3a39e52ee2b073dcaed63bc669db"},
+    {file = "numpy-1.8.2.zip", hash = "sha256:e9fd7465ec96b8e135278f2b016f0122c12f18d356c1279959e7257fe99f6d0e"},
+]
+scipy = [
+    {file = "scipy-0.13.3-cp26-cp26mu-manylinux1_x86_64.whl", hash = "sha256:ecae03b53782233a8e829e5f925cb286d01f0bcd00e50523c82a715eae5981ed"},
+    {file = "scipy-0.13.3-cp27-cp27m-manylinux1_x86_64.whl", hash = "sha256:88e75eacc9092a5627c1eb49eee9f0c5f2c7dc5f312560ef779492710ddd67bf"},
+    {file = "scipy-0.13.3-cp27-cp27mu-manylinux1_x86_64.whl", hash = "sha256:77906ba1afba1616acbfb23b4d3cdcfe57f599b5effb838b03735120677516ba"},
+    {file = "scipy-0.13.3-cp27-none-macosx_10_6_intel.whl", hash = "sha256:51a2f4e63db8dd3cad8afca7322d7b9ca7cc600454fd09fa2bb94cee3fa304d9"},
+    {file = "scipy-0.13.3-cp33-cp33m-macosx_10_6_intel.whl", hash = "sha256:9585e4aa9c3e2c405833d7159225cefe380ac3bfdfa9dbcc44d83647daaf7f78"},
+    {file = "scipy-0.13.3-cp33-cp33m-manylinux1_x86_64.whl", hash = "sha256:7f4806bf4350ffcbf43830ed52a652e7b761f7e74c1366155320c203015e4635"},
+    {file = "scipy-0.13.3-cp34-cp34m-macosx_10_6_intel.whl", hash = "sha256:d516da969bf90b95c709f7f23a08bc200507273bea6c6bfd8a3c1bdca6b30a2b"},
+    {file = "scipy-0.13.3-cp34-cp34m-manylinux1_x86_64.whl", hash = "sha256:49e15363c65fe2cb9a52de3f9d223f64fa1d7a716282121af0d50b4e8e5a35a9"},
+    {file = "scipy-0.13.3.tar.gz", hash = "sha256:a9e33c7ee060c35cd5c6ee3ac9e5e9bbb99219d7ea8c89537c2e80e581670266"},
+    {file = "scipy-0.13.3.zip", hash = "sha256:147579177cea79db57d594c1d267c1a4cf179e3597e58cce070392ef39dcd9f7"},
+]

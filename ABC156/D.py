@@ -1,7 +1,7 @@
 n, a, b = map(int, input().split())
 MOD = 10 ** 9 + 7
 
-def comb(n,r, mod):
+def comb(n, r, mod):
     res = 1
     fac = 1
     for i in range(r):

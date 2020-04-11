@@ -96,3 +96,14 @@ def base_10_to_n(i, n):
     if i//n:
         return base_10_to_n(i//n, n) + str(i % n)
     return str(i % n)
+
+### 行列を標準出力する
+def print_matrix(matrix):
+    h = len(matrix[0])
+    w = len(matrix[1])
+    yticks = [str(i) for i in range(w)]
+    print('  | ' + ' '.join(yticks))
+    print('--' * (w + 2))
+    for i, l in enumerate(matrix):
+        print('{} | '.format(i), end='')
+        print(' '.join(list(map(str, l))))

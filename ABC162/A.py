@@ -1,6 +1,6 @@
 N = input()
 
-if '7' in list(N):
+if '7' in N:
     print('Yes')
 else:
     print('No')

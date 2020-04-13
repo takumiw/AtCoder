@@ -110,18 +110,19 @@ def print_matrix(matrix):
 
 ### 最大公約数を求める
 import math
-from functools import reduce
-def gcd(*numbers):
-    return reduce(math.gcd, numbers)
+def gcd(a, b):
+    return math.gcd(a, b)
+
+def gcd(a, b, c):
+    return math.gcd(math.gcd(a, b), c)
 
 ### 最小公倍数を求める
 import math
-from functools import reduce
 def lcm_base(x, y):
     return (x * y) // math.gcd(x, y)
 
-def lcm(*numbers):
-    return reduce(lcm_base, numbers, 1)
+def lcm(a, b, c):
+    return lcm_base(lcm_base(a, b), c)
 
 ### UnionFind
 class UnionFind():

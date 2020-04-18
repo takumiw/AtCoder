@@ -14,8 +14,8 @@ def main():
     sum_b = sum(A)
     print(sum_b)
     if sum_b:
-        ans = [str(i) for i, v in enumerate(A) if v == 1]
-        print('\n'.join(ans))
+        ans = [i for i, v in enumerate(A) if v == 1]
+        print(*ans, sep='\n')
 
 
 if __name__ == "__main__":

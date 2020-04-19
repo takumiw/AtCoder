@@ -1,16 +1,8 @@
 AGC032
-C_Many_Medians.py
-D_Binomial_Coefficients.py
 HackToTheFuture2019PreOpen
 Tenka1_Beginner
-TwoCoins.py
-VirtualEnv.ipynb
-Xmas
-example
 Untitled\ Folder
 Untitled\ Folder\ 1
-ABC138/D_wrong.py
-ABC136/original_D.py
 ABC085/C_Otoshidama.ipynb
 
 
@@ -178,4 +170,3 @@ dmypy.json
 # End of https://www.gitignore.io/api/macos,python,jupyternotebooks,visualstudiocode
 
 .vscode
-ABC142/E.py

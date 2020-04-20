@@ -124,6 +124,14 @@ def lcm_base(x, y):
 def lcm(a, b, c):
     return lcm_base(lcm_base(a, b), c)
 
+### ある非負整数nに含まれる素因数dの数
+def count_factor(n, d=2):
+    if n % d != 0:
+        return 0
+    for i in range(n):
+        if n & d<<i:
+            return i + 1
+
 ### UnionFind
 class UnionFind():
     def __init__(self, n):

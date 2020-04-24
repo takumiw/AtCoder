@@ -1,10 +1,9 @@
 # (a ** n) % mod
-def modinv(n, a, mod):
+def modinv(n, a, mod=MOD):
     return pow(a, n, mod)
 
-
 # nCr % mod
-def comb(n, r, mod):
+def comb(n, r, mod=MOD):
     res = 1
     fac = 1
     for i in range(r):
@@ -13,6 +12,14 @@ def comb(n, r, mod):
         fac *= i+1
         fac %= mod
     return res * pow(fac, mod-2, mod) % mod
+
+### N! % mod
+def factorial(N, mod=MOD):
+    res = 1
+    for i in range(2, N+1):
+        res *= i
+        res %= mod
+    return res
 
 
 from heapq import heapify, heappush, heappop

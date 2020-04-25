@@ -43,6 +43,12 @@ def binary_search(l: list, x: int) -> bool:
     return False
 
 
+### 重複を含む順列を生成する l=[1, 2], n=3 -> [[1,1,1],[1,1,2],[1,1,3],...]
+from itertools import product
+def pro(l, n):
+    return list(product(l, repeat=n))
+
+
 # 重複を含む順列を生成する
 from itertools import permutations
 def permutation(l, n):
@@ -55,7 +61,7 @@ def permutation(l, n):
     return [p for p in permutations(l, n)]
 
 
-# 重複を含まない組み合わせを生成する
+# 組み合わせを生成する
 from itertools import combinations
 def combination(l, n):
     '''

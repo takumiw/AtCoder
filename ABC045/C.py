@@ -1,19 +1,18 @@
-S = input()
+import sys
+readline = sys.stdin.readline
 
-# bit全探索で解く
-def solve():
+def main():
+    S = readline().rstrip()
+    N = len(S)
     ans = 0
-
-    for i in range(2**(len(S)-1)):
-        value = list(S)
-        bit = list(str(bin(i))[2:].zfill(len(S)-1))
-        for i, p in enumerate(bit):
-            if int(p):
-                value[i] = value[i] + '+'
-        values = ''.join(value).split('+')
-        values = list(map(int, values))
-        ans += sum(values)
+    for i in range(2**(N-1)):
+        b = bin(i)[2:].zfill(N-1)
+        f = [S[i]+'+' if b[i]=='1' else S[i] for i in range(N-1)]
+        f += S[-1]
+        ans += eval(''.join(f))
+    
     print(ans)
 
-if __name__ == "__main__":
-    solve()
+
+if __name__ == '__main__':
+    main()

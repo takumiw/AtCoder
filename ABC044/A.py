@@ -1,0 +1,5 @@
+N = int(input())
+K = int(input())
+X = int(input())
+Y = int(input())
+print(min(K, N) * X + max(N-K, 0) * Y)

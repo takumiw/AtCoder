@@ -1,11 +1,13 @@
-S = input()
+import sys
+readline = sys.stdin.readline
 
-S = S.replace('eraser', '')
-S = S.replace('erase', '')
-S = S.replace('dreamer', '')
-S = S.replace('dream', '')
+def main():
+    S = readline().rstrip()
+    T = S.replace('eraser', '').replace('erase', '').replace('dreamer', '').replace('dream', '')
+    if not T:
+        print('YES')
+    else:
+        print('NO')
 
-if len(S) == 0:
-    print('YES')
-else:
-    print('NO')
+if __name__ == '__main__':
+    main()

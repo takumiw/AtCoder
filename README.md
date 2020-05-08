@@ -17,10 +17,25 @@
 
 ## Dynamic Programming (動的計画法)
 * ABC044/C
+* ABC125/D
+* ABC040/C
 
 ## DFS, BFS
 * ABC036/D
 * ABC054/C
+
+## XOR
+* ABC121/D
+
+## Recursive Functions (再帰関数)
+* ABC115/D
+
+## しゃくとり法
+* ABC130/D
+* ABC038/C
+* ARC022/B
+* ABC098/D
+* ABC017/D
 
 
 ## Profile

@@ -1,12 +1,21 @@
-N = int(input())
-t, x, y = 0, 0, 0
+import sys
+readline = sys.stdin.readline
 
-for _ in range(N):
-    ti, xi, yi = map(int, input().split())
-    dt, dx, dy = ti - t, abs(xi - x), abs(yi - y)
-    t, x, y = ti, xi, yi
-    if ((dt - (dx + dy)) % 2 != 0) or (dx + dy > dt):
-        print('No')
-        exit()
+def main():
+    N = int(readline())
+    res = 'Yes'
+    pre_x, pre_y = 0, 0
+    pre = 0
+    for _ in range(N):
+        t, x, y = map(int, readline().rstrip().split())
+        cost = abs(x - pre_x) + abs(y - pre_y)
+        if (t - pre) - cost >= 0 and ((t - pre) - cost) % 2 == 0:
+            pre, pre_x, pre_y = t, x, y
+        else:
+            res = 'No'
+            break
 
-print('Yes')
+    print(res)
+
+if __name__ == '__main__':
+    main()

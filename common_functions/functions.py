@@ -1,17 +1,35 @@
+### 逆元シリーズ
 # (a ** n) % mod
 def modinv(n, a, mod=MOD):
     return pow(a, n, mod)
 
-# nCr % mod
+# nCr % mod O(r)
 def comb(n, r, mod=MOD):
+    r = min(n - r, r)
     res = 1
     fac = 1
     for i in range(r):
-        res *= n-i
+        res *= n - i
         res %= mod
-        fac *= i+1
+        fac *= i + 1
         fac %= mod
     return res * pow(fac, mod-2, mod) % mod
+
+# nCr % mod 前処理にO(n), 毎回の呼び出しにO(1)
+fact = [1] * (N+1)
+finv = [1] * (N+1)
+inv = [1] * (N+1)
+inv[0] = 0
+for i in range(2, N+1):
+    fact[i] = (fact[i-1] * i % MOD)
+    inv[i] = (-inv[MOD%i] * (MOD // i)) % MOD
+    finv[i] = (finv[i-1] * inv[i]) % MOD
+
+def comb(n, r, mod=MOD):
+    if r < 0 or n < r:
+        return 0
+    return fact[n] * finv[r] * finv[n-r] % mod
+
 
 ### N! % mod
 def factorial(N, mod=MOD):
@@ -22,17 +40,18 @@ def factorial(N, mod=MOD):
     return res
 
 
+### 優先度付きキュー
 from heapq import heapify, heappush, heappop
-def solve_heapq(l: list):
+def solve_heapq(l):
     heapify(l)  # リストlをheapqにする
-    m = heappop(l)  # heapqの最小値をpopする
-    heappush(l, 3)  # heapqに値(3)を追加する
+    m = heappop(l)  # heapqの最小値をpopする O(1)
+    heappush(l, 3)  # heapqに値(3)を追加する O(logN)
 
 
+### 二分探索, リストlにxがあるか否か O(logn)
 from bisect import bisect_left
-def binary_search(l: list, x: int) -> bool:
+def binary_search(l, x):
     '''
-    リストからxを探索する, O(logn)
     @param l: 二分探索する昇順ソート済みリスト
     @param x: 二分探索する値
     @return bool: リストにxが存在するか否か
@@ -43,38 +62,31 @@ def binary_search(l: list, x: int) -> bool:
     return False
 
 
-### 重複を含む順列を生成する l=[1, 2], n=3 -> [[1,1,1],[1,1,2],[1,1,3],...]
+### 順列/組み合わせシリーズ
+# 重複を含む順列を生成する l=[1,2], n=3 -> [[1,1,1],[1,1,2],[1,1,3],...]
 from itertools import product
 def pro(l, n):
     return list(product(l, repeat=n))
 
-
-# 重複を含む順列を生成する
+# 重複を含まない順列を生成する l=[1,2,3], n=3 -> [[1,2,3],[1,3,2],[2,1,3],...]
 from itertools import permutations
 def permutation(l, n):
-    '''
-    lPnの順列を生成する
-    @param l: 順列を生成する要素のリスト
-    @param n: lからいくつ取り出すか
-    @return list: 全ての順列
-    '''
-    return [p for p in permutations(l, n)]
+    return list(permutations(l, n))
 
+# 重複を含む組み合わせを生成する l=[1,2,3], n=3 -> [[1,1,1],[1,1,2],[1,1,3],[1,2,2]...]
+from itertools import combinations_with_replacement
+def combination(l, n):
+    return list(combinations_with_replacement(l, n))
 
-# 組み合わせを生成する
+# 重複を含まない組み合わせを生成する l=[1,2,3], n=2 -> [[1,2],[1,3],[2,3]]
 from itertools import combinations
 def combination(l, n):
-    '''
-    lCnの組み合わせを生成する
-    @param l: 組み合わせを生成する要素のリスト
-    @param n: lからいくつ取り出すか
-    @return list: 全ての組み合わせ
-    '''
-    return [p for p in combinations(l, n)]
+    return list(combinations(l, n))
 
 
+### 約数/素数シリーズ
 # 2以上の整数の約数を列挙する, O(√n)
-def make_divisors(n) -> list:
+def make_divisors(n):
     divisors = []
     for i in range(1, int(n**0.5)+1):
         if n % i == 0:
@@ -84,6 +96,33 @@ def make_divisors(n) -> list:
     divisors.sort()  # 必要に応じてソートする(O(nlogn))
     return divisors
 
+# 素因数分解 factorize(900) -> [2, 2, 3, 3, 5, 5]
+def factorize(n):
+    b = 2
+    fct = []
+    while b * b <= n:
+        while n % b == 0:
+            n //= b
+            fct.append(b)
+        b = b + 1
+    if n > 1:
+        fct.append(n)
+    return fct
+
+##素因数分解 factorize(900) -> [(2, 2), (3, 2), (5, 2)]
+def factorize(n):
+    fct = []  # prime factor
+    b, e = 2, 0  # base, exponent
+    while b * b <= n:
+        while n % b == 0:
+            n = n // b
+            e = e + 1
+        if e > 0:
+            fct.append((b, e))
+        b, e = b + 1, 0
+    if n > 1:
+        fct.append((n, 1))
+    return fct
 
 # 素数かどうか判定する, O(√n)
 import math
@@ -100,7 +139,7 @@ def is_prime(x):
     return True
 
 
-### N進数->10進数
+### N進数->10進数 (n進数の文字列s)
 def base_n_to_10(s, n):
     return int(s, n)
 
@@ -144,6 +183,30 @@ def count_factor(n, d=2):
     for i in range(n):
         if n & d<<i:
             return i + 1
+
+### 四捨五入する, r=0: 整数に四捨五入, 0.1: 小数点第一桁に四捨五入, etc.
+from decimal import Decimal, ROUND_HALF_UP, ROUND_HALF_EVEN
+def round(f, r=0):
+    return Decimal(str(f)).quantize(Decimal(str(r)), rounding=ROUND_HALF_UP)
+
+### 切り上げする, a / b
+def ceil(a, b):
+    return -(-a//b)
+
+### 最大二部マッチング
+# -> ABC091/C_networkx.py
+
+### 配列の部分和をDPで求める
+# -> ABC044/C.py
+
+### グラフ系
+# Warshall Floyd ->  ABC022/C.py, ABC012/D, ABC079/D, ARC035/C
+
+# Dijkstra -> ABC021/C (最短経路の数え上げ), ABC035/D, ABC051/D
+
+# Bellman-Ford -> ABC061/D
+
+# DFS/BFS -> ABC036/D, ABC054/C
 
 ### UnionFind
 class UnionFind():

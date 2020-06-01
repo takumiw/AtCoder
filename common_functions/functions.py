@@ -189,6 +189,11 @@ from decimal import Decimal, ROUND_HALF_UP, ROUND_HALF_EVEN
 def round(f, r=0):
     return Decimal(str(f)).quantize(Decimal(str(r)), rounding=ROUND_HALF_UP)
 
+### decimal型, デフォルトでは28桁まで浮動小数点を扱える
+from decimal import Decimal
+def to_decimal(n: str):
+    return Decimal(n)
+
 ### 切り上げする, a / b
 def ceil(a, b):
     return -(-a//b)
@@ -205,6 +210,7 @@ def ceil(a, b):
 # Dijkstra
 from scipy.sparse.csgraph import dijkstra
 G = dijkstra(path, indices=0)  # 空間計算量: O(N^2)
+from heapq import heapify, heappush, heappop
 def dijkstra(path, N, start):
     """
     Args:

@@ -87,14 +87,15 @@ def combination(l, n):
 ### 約数/素数シリーズ
 # 2以上の整数の約数を列挙する, O(√n)
 def make_divisors(n):
-    divisors = []
-    for i in range(1, int(n**0.5)+1):
+    lower_divisors , upper_divisors = [], []
+    i = 1
+    while i*i <= n:
         if n % i == 0:
-            divisors.append(i)
+            lower_divisors.append(i)
             if i != n // i:
-                divisors.append(n//i)
-    divisors.sort()  # 必要に応じてソートする(O(nlogn))
-    return divisors
+                upper_divisors.append(n//i)
+        i += 1
+    return lower_divisors + upper_divisors[::-1]
 
 # 素因数分解 factorize(900) -> [2, 2, 3, 3, 5, 5]
 def factorize(n):
@@ -198,18 +199,13 @@ def to_decimal(n: str):
 def ceil(a, b):
     return -(-a//b)
 
-### 最大二部マッチング
-# -> ABC091/C_networkx.py
-
-### 配列の部分和をDPで求める
-# -> ABC044/C.py
-
 ### グラフ系
-# Warshall Floyd ->  ABC022/C.py, ABC012/D, ABC079/D, ARC035/C
+# Warshall Floyd
 
-# Dijkstra
+# Dijkstra O(ElogV) (V頂点E辺)
 from scipy.sparse.csgraph import dijkstra
 G = dijkstra(path, indices=0)  # 空間計算量: O(N^2)
+
 from heapq import heapify, heappush, heappop
 def dijkstra(path, N, start):
     """
@@ -285,3 +281,84 @@ class UnionFind():
 
     def __str__(self):
         return '\n'.join('{}: {}'.format(r, self.members(r)) for r in self.roots())
+
+### 重み付きUnionFind (https://at274.hatenablog.com/entry/2018/02/03/140504)
+class WeightedUnionFind:
+    def __init__(self, n):
+        self.parents = [i for i in range(n)]
+        self.rank = [0] * n
+        self.weight = [0] * n  # 根への距離を管理
+
+    def find(self, x):
+        if self.parents[x] == x:
+            return x
+        else:
+            y = self.find(self.parents[x])
+            # 親への重みを追加しながら根まで走査
+            self.weight[x] += self.weight[self.parents[x]]
+            self.parents[x] = y
+            return y
+
+    def union(self, x, y, w):
+        rx = self.find(x)
+        ry = self.find(y)
+        # xの木の高さ < yの木の高さ
+        if self.rank[rx] < self.rank[ry]:
+            self.parents[rx] = ry
+            self.weight[rx] = w - self.weight[x] + self.weight[y]
+        # xの木の高さ ≧ yの木の高さ
+        else:
+            self.parents[ry] = rx
+            self.weight[ry] = -w - self.weight[y] + self.weight[x]
+            # 木の高さが同じだった場合の処理
+            if self.rank[rx] == self.rank[ry]:
+                self.rank[rx] += 1
+
+    def same(self, x, y):
+        return self.find(x) == self.find(y)
+
+    # xからyへのコスト
+    def diff(self, x, y):
+        return self.weight[x] - self.weight[y]
+
+### BIT (Binary Indexed Tree)
+class Bit:
+    def __init__(self, n):
+        self.size = n
+        self.tree = [0] * (n+1)
+ 
+    def __iter__(self):
+        psum = 0
+        for i in range(self.size):
+            csum = self.sum(i+1)
+            yield csum - psum
+            psum = csum
+        raise StopIteration()
+ 
+    def __str__(self):  # O(nlogn)
+        return str(list(self))
+ 
+    def sum(self, i):
+        # [0, i) の要素の総和を返す
+        if not (0 <= i <= self.size): raise ValueError("error!")
+        s = 0
+        while i > 0:
+            s += self.tree[i]
+            i -= i & -i
+        return s
+ 
+    def add(self, i, x):
+        if not (0 <= i < self.size): raise ValueError("error!")
+        i += 1
+        while i <= self.size:
+            self.tree[i] += x
+            i += i & -i
+ 
+    def __getitem__(self, key):
+        if not (0 <= key < self.size): raise IndexError("error!")
+        return self.sum(key+1) - self.sum(key)
+ 
+    def __setitem__(self, key, value):
+        # 足し算と引き算にはaddを使うべき
+        if not (0 <= key < self.size): raise IndexError("error!")
+        self.add(key, value - self[key])

@@ -3,10 +3,6 @@ readline = sys.stdin.readline
 from heapq import heapify, heappush, heappop
 
 def dijkstra(path, N, start):
-    """
-    Args:
-        path (list): [[(cost, node), (cost, node), ...], [], [], ...]
-    """
     visited = [False] * N
     que = [(0, start)]
     heapify(que)  # 始点aから各頂点への(距離, 頂点ID)
@@ -26,16 +22,16 @@ def dijkstra(path, N, start):
     return dist
 
 def main():
-    N = int(input())
+    N = int(readline())
     path = [[] for _ in range(N)]
     for _ in range(N-1):
         u, v, w = map(int, readline().rstrip().split())
         path[u-1].append((w, v-1))
         path[v-1].append((w, u-1))
     
-    G = dijkstra(path, N, 0)
-    for i in range(N):
-        if G[i] % 2 == 0:
+    dist = dijkstra(path, N, 0)
+    for d in dist:
+        if d % 2 == 0:
             print(0)
         else:
             print(1)
